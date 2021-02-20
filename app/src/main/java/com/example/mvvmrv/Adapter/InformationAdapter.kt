@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvmrv.R
 import com.example.mvvmrv.model.Information
-import com.example.mvvmrv.viewmodel.InformationViewModel
 
 class InformationAdapter(
-    private val context: Context,
-    private val informationViewModel: InformationViewModel,
-    private val infoList : ArrayList<Information>
+        private val context: Context,
+        private val infoList: MutableList<Information>
 ) : RecyclerView.Adapter<InformationAdapter.InformationVH>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,5 +35,12 @@ class InformationAdapter(
     inner class InformationVH(itemView : View) : RecyclerView.ViewHolder(itemView){
         val name : TextView = itemView.findViewById(R.id.info_name)
         val age : TextView = itemView.findViewById(R.id.info_age)
+
+        init {
+            itemView.setOnClickListener {
+                val pos = adapterPosition
+                Toast.makeText(context, "You clicked $pos", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }
